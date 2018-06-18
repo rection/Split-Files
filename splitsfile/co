@@ -1,1 +1,0 @@
-cument.body.onload = function(){window.n && window.n();if (document.images){
