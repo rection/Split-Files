@@ -16,10 +16,19 @@ class install:
         LINKCODE=urllib.request.urlopen(LINK).getcode()
         if LINKCODE == 200:
             print('Found the web page')
-                    
+
     def wget(self):
         ols=os.system('bash ./authentication.sh')
         return ols
+
+    def download(self,LINK,bolum):
+        com1="wget -O ./splitsfile/downloadedfile"+LINK
+        com1=shlex.split(com1)
+        subprocess.run(com1)
+        com2="split -n"+str(bolum)+"./splitsfile/downloadedfile ./splitsfile/"
+        com2=shlex.split(com2)
+        subprocess.run(com2)
+
 
 class reunite:
     def __init__(self,directory):
@@ -36,14 +45,14 @@ class reunite:
         except Exception as e:
             raise
         return 'process complete!'
-        
+
 class ask:
     def __init__(self):
         self.bolum=None
 
     def pieces(self):
         bolum=-2
-        while False == (( 0 <= int(bolum)) & (isinstance(bolum,int))):            
+        while False == (( 0 <= int(bolum)) & (isinstance(bolum,int))):
             try:
                 bolum=int(input("How many piece file: "))
                 if int(bolum) <= 0:
@@ -71,7 +80,7 @@ while (answer != 2) & (answer != 1) & (answer != 3):
 
 if answer==1:
     print("Your link should be www.example.com")
-    LINK=input("link : ") 
+    LINK=input("link : ")
     INSTALL = install()
     try:
         INSTALL.check(LINK)
@@ -97,11 +106,10 @@ if answer==1:
             print('you don\'t work this program.')
     bolum = SORGU.pieces()
     try:
-        subprocess.call(['wget','-O','./splitsfile/downloadedfile',LINK])
-        subprocess.call(['split','-n',str(bolum),'./splitsfile/downloadedfile','./splitsfile/'])
+        INSTALL.download(LINK,bolum)
     except OSError:
         print("Your os failure ")
-        
+
 if answer==2:
     PATH = str(input("can you give a path: ")).rstrip()
     try:
@@ -119,7 +127,7 @@ if answer==2:
             print('your os fauilure')
     else:
         print('please give me correct path!')
-    
+
 
 if answer == 3:
     calls = reunite('directory')
@@ -128,4 +136,3 @@ if answer == 3:
         ZEP=calls.command(DIR)
     except:
         print("I didn't found directory. Problem is: ", sys.exc_info()[0])
-    
