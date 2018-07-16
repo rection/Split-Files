@@ -3,11 +3,10 @@
 import sys,shlex
 import os,errno,logging
 import subprocess,urllib.request
-from subprocess import Popen
+
 
 class install:
     def __init__(self):
-        self.ols = None
         self.LINK = None
 
     def check(self,LINK):
@@ -18,26 +17,31 @@ class install:
             print('Found the web page')
 
     def wget(self):
-        ols=os.system('bash ./authentication.sh')
-        return ols
+        command2="bash ./authentication.sh"
+        command2=shlex.split(command2)
+        subprocess.run(command2)
+        return "I have installed wget"
 
     def download(self,LINK,bolum):
-        com1="wget -O ./splitsfile/downloadedfile"+LINK
+        com1="wget -O ./splitsfile/downloadedfile "+LINK
         com1=shlex.split(com1)
         subprocess.run(com1)
-        com2="split -n"+str(bolum)+"./splitsfile/downloadedfile ./splitsfile/"
+        com2="split -n "+str(bolum)+" ./splitsfile/downloadedfile ./splitsfile/"
         com2=shlex.split(com2)
         subprocess.run(com2)
+        return "I have downloaded file"
 
 
 class reunite:
     def __init__(self,directory):
         self.directory = directory
+
     def inputal(self):
         directory=input("you give me a path : ")
         os.path.join(directory,'')
         directory= directory+'*'
         return directory
+
     def command(self,directory):
         command = 'cat ' + directory + ' > orginalfile'
         try:
@@ -60,6 +64,11 @@ class ask:
             except ValueError:
                 logging.error('You should give meaningful a number: ')
             return bolum
+
+    def split_on_file(self,bolum,PATH):
+        command1="split -n"+str(bolum)+" "+PATH+" ./splitsfile/"
+        command1=shlex.split(command1)
+        subprocess.run(command1)
 
 SORGU = ask()
 
@@ -122,7 +131,7 @@ if answer==2:
     if os.path.isfile(PATH):
         try:
             bolum = SORGU.pieces()
-            subprocess.call(['split','-n',str(bolum), PATH ,'./splitsfile/'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            SORGU.split_on_file(bolum,PATH)
         except OSError:
             print('your os fauilure')
     else:
