@@ -1,1 +1,0 @@
-eplace("/search?"+c.replace(/(^|&)fp=[^&]*/g,

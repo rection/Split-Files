@@ -1,1 +1,0 @@
-(){return(new Date).getTime()};(function(){go
