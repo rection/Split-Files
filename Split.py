@@ -101,9 +101,7 @@ if answer==1:
         subprocess.call(['split','-n',str(bolum),'./splitsfile/downloadedfile','./splitsfile/'])
     except OSError:
         print("Your os failure ")
-        
-    return "it's successfuly parted"
-
+    print("it's successfuly parted")
 
 if answer==2:
     PATH = str(input("can you give a path: ")).rstrip()
@@ -122,7 +120,7 @@ if answer==2:
             print('your os fauilure')
     else:
         print('please give me correct path!')
-    return "it's successfuly parted"
+    print("it's successfuly parted")
 
 
 if answer == 3:
@@ -133,4 +131,4 @@ if answer == 3:
     except:
         print("I didn't found directory. Problem is: ", sys.exc_info()[0])
 
-    return "It's successfuly parted"
+    print("It's successfuly parted")

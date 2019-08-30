@@ -13,3 +13,4 @@ class TestUM(unittest.TestCase):
  
 if __name__ == '__main__':
     unittest.main()
+    #print(TestUM.test_numbers_3_4())
