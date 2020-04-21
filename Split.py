@@ -104,7 +104,7 @@ if answer==1:
     print("it's successfuly parted")
 
 if answer==2:
-    PATH = str(input("can you give a path: ")).rstrip()
+    PATH = str(input("The path: ")).rstrip()
     try:
         if not os.path.exists(__directory):
             os.makedirs(__directory)
